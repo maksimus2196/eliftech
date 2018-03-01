@@ -16,7 +16,7 @@ schema.methods.encryptPassword = function(password) {
     return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
 };
 
-schema.virtual('password')
+schema.virtual('passwords')
     .set(function(password) {
         this._plainPassword = password;
         this.salt = Math.random() + '';

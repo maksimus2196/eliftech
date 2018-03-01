@@ -2,7 +2,7 @@ import HttpStatus from 'http-status-codes';
 import { controller, get, post, put, del } from 'koa-dec-router';
 import BaseCtrl from './Base';
 import mongoose from 'mongoose';
-import User from './models/User';
+import User from '../models/User';
 import passport from 'passport';
 
 console.log('Connect');
