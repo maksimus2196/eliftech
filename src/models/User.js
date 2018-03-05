@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import crypto from 'crypto';
 import async from 'async';
 
+
 var Schema = mongoose.Schema;
 
 var schema = new Schema({
@@ -59,5 +60,6 @@ function AuthError(message) {
 AuthError.prototype.name = 'AuthError';
 
 exports.AuthError = AuthError;
-export default mongoose.model('User', schema);
+export default mongoose.model('User',schema);
 // GET /accounts"?"(seach google) userid
+// export default filter(){}

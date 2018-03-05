@@ -1,44 +1,36 @@
 import HttpStatus from 'http-status-codes';
 import { controller, get, post, put, del } from 'koa-dec-router';
 import BaseCtrl from './Base';
-import mongoose from 'mongoose';
 import User from '../models/User';
-import passport from 'passport';
+import passport from 'koa-passport';
 
-console.log('Connect');
-console.log(mongoose.version);
-@controller('/test')
+@controller('/')
 
 export default class TestCtrl extends BaseCtrl {
     @get('')
     async getList(ctx) {
-        User.create({
-
-            userneme :'Mask',
-            password :'1111',
-                firstname:'Maksim',
-                secondname:'Hibovskiy',
-                age : '22'
-        });
-
-        try {
-            const items = await User.find().lean();
-
-            ctx.ok(items);
-        } catch (err) {
-            ctx.throw(HttpStatus.BAD_REQUEST, err.message);
+            try {
+                const items = await User.find();
+                ctx.ok(items);
+            } catch (err) {
+                ctx.throw(HttpStatus.BAD_REQUEST, err.message);
+            }
         }
-        User.save();
-
-    }
 
     @post('')
-    async createItem(ctx) {
 
-        passport.authenticate('local', { failureRedirect: '/login' }),
-            function(req, res) {
-                res.redirect('/');
-            };}
+    async createItem(ctx) {
+        try {
+        var username = ctx.request.body;
+        var password = ctx.request.body;
+        passport.Authenticator('local', {failureRedirect: '/login'});
+            console.log('Hello');
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+}
 
     @get('/:_id')
     async getItemById(ctx) {
