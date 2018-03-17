@@ -1,4 +1,4 @@
 import { controller } from 'koa-dec-router';
 
-@controller('/api')
+@controller('/user')
 export default class Api {}

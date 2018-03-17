@@ -1,39 +1,20 @@
 import User from '../models/User';
 import passport from 'koa-passport';
-import { Strategy } from 'passport-local';
+import { LocalStrategy } from 'passport-jwt';
 
-passport.serializeUser((user, done) => {
-    done(null, user.id)
-})
-
-passport.deserializeUser(async (id, done) => {
-    try {
-        const user = await User.findById(id, '-password')
-        done(null, user)
-    } catch (err) {
-        done(err)
-    }
-})
-
-passport.use('local', new Strategy({
-    usernameField: 'username',
+passport.use(new LocalStrategy({
+    usernameField: 'email',
     passwordField: 'password'
-}, async (username, password, done) => {
-    try {
-        const user = await User.findOne({ username })
-        if (!user) { return done(null, false) }
+}, function(username, password,done){
+    User.findOne({ username : username},function(err,user){
+        return err
+            ? done(err)
+            : user
+                ? password === user.password
+                    ? done(null, user)
+                    : done(null, false, { message: 'Incorrect password.' })
+                : done(null, false, { message: 'Incorrect username.' });
+    });
+}));
 
-        try {
-            const isMatch = await user.validatePassword(password)
 
-            if (!isMatch) { return done(null, false) }
-
-            done(null, user)
-        } catch (err) {
-            done(err)
-        }
-
-    } catch (err) {
-        return done(err)
-    }
-}))
