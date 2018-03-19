@@ -2,13 +2,12 @@ import HttpStatus from 'http-status-codes';
 import { controller, get, post, put, del } from 'koa-dec-router';
 import BaseCtrl from './Base';
 import User from '../models/User';
-import passport from 'koa-passport';
-
+import {passport, checkUser} from '../lib/passport';
 @controller('/user_setting')
 
 
 export default class TestCtrl extends BaseCtrl {
-    @get('')
+    @get('',checkUser)
     async getList(ctx) {
         try {
 

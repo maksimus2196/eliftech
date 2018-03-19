@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 
 var schema = new Schema({
     username: {type: String, requare: true},
-    password:{type:String, requare:true},
+    passwordHash:{type:String, requare:true},
     firstname:{type:String, requare:true},
     secondname:{type:String, requare:true},
     age:{type:String, requare:true},

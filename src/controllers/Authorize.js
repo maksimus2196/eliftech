@@ -1,12 +1,12 @@
 import HttpStatus from 'http-status-codes';
 import { controller, get, post, put, del } from 'koa-dec-router';
 import BaseCtrl from './Base';
-import User from'../lib/passport';
+import {passport, checkUser} from'../lib/passport';
 
-@controller('/authorize')
+@controller('/authorize',checkUser)
 
 export default class TestCtrl extends BaseCtrl {
-    @get('')
+    @get('',checkUser)
     async getList(ctx) {
         try {
             const items = await User.find();

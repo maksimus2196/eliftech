@@ -5,6 +5,7 @@ import respond from 'koa-respond';
 import bodyParser from 'koa-bodyparser';
 import compress from 'koa-compress';
 import DecRouter from 'koa-dec-router';
+import passport from '../lib/passport'
 
 
 import { logger } from './logger';
@@ -41,7 +42,9 @@ export async function createServer() {
     .use(decRouter.router.routes())
     .use(decRouter.router.allowedMethods())
     // Default handler when nothing stopped the chain.
-    .use(notFoundHandler);
+    .use(notFoundHandler)
+      .use(passport.initialize())
+     .use(passport.session());
 
 
   // Creates a http server ready to listen.
