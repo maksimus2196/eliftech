@@ -29,6 +29,7 @@ export default class TestCtrl extends BaseCtrl {
             user.secondname = ctx.request.body
             );
             user.save();
+            return (statusCode(200));
             }
         catch (err) {
             console.log(err);

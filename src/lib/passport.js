@@ -1,5 +1,7 @@
 import User from '../models/User';
-import { LocalStrategy,passport } from 'koa-passport';
+import passport  from 'koa-passport';
+import { Strategy as LocalStrategy } from 'passport-local';
+
 
 
 passport.use(new LocalStrategy({
@@ -14,18 +16,21 @@ passport.use(new LocalStrategy({
             if (!user || !user.checkPassword(password)) {
                 return done(null, false, {message: 'Нет такого пользователя или пароль неверен.'});
             }
+            passport.serializeUser(User.serializeUser());
             return done(null, user);
         });
     }
 ));
-function checkUser (err,next) {
+module.exports = function checkUser (err,next) {
 
-    if (ctx.user){
-        return(next);
+    if (ctx.user)
+    {
+        return next;
     }
     else
         {
-            return (err);
+            return next.status(401) ;
         }
 }
-module.exports.checkUser();
+module.exports = passport;
+

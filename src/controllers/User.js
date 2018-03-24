@@ -14,7 +14,7 @@ export default class TestCtrl extends BaseCtrl {
             } catch (err) {
                 ctx.throw(HttpStatus.BAD_REQUEST, err.message);
             }
-        await passport.authenticate('jwt', function (err, user) {
+        await passport.authenticate( function (err, user) {
             if (user) {
                 ctx.body = "hello " + user.displayName;
             } else {

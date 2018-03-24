@@ -5,7 +5,7 @@ import respond from 'koa-respond';
 import bodyParser from 'koa-bodyparser';
 import compress from 'koa-compress';
 import DecRouter from 'koa-dec-router';
-import passport from '../lib/passport'
+import passport from './passport'
 
 
 import { logger } from './logger';
