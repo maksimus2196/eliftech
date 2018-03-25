@@ -33,14 +33,8 @@
 <script>
     import axios from '../my-axios';
     export default {
-        async postss() {
-            try {
-                await axios.post(`/registration`, this.form);
 
-            } catch (e) {
-                this.errors.push(e);
-            }
-        },
+
         data() {
 
             var checkAge = (rule, value, callback) => {
@@ -77,12 +71,13 @@
                 }*/ else {
                     callback();
                 }
+
             };
             return {
 
                 ruleForm2: {
                     username:'',
-                    firstname:'',
+                    firstname: '',
                     secondname:'',
                     inform:'',
                     password: '',
@@ -101,13 +96,15 @@
 
                 }
             };
+
         },
-post: {
     methods: {
         submitForm(formName) {
+            axios.post('/registration', this.User)
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     alert('submit!');
+
                 } else {
                     console.log('error submit!!');
                     return false;
@@ -118,16 +115,15 @@ post: {
             this.$refs[formName].resetFields();
         }
     },
+        async postss() {
+            try {
+                await axios.post(`/registration`, this.ruleForm);
 
-
-},
-        statusCode: {
-            200: function () {
-                window.location.href = "/user"+username;
-            },
-            403: function (jqXHR) {
-                var error = JSON.parse(jqXHR.responseText);
-                $('.error', form).html(error.message)
-            }}
+            } catch (e) {
+                this.errors.push(e)
+            }
+        },
     }
+
+
 </script>
