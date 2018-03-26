@@ -7,14 +7,6 @@ import {passport, checkUser} from'../lib/passport';
 
 export default class TestCtrl extends BaseCtrl {
     @get('',checkUser)
-    async getList(ctx) {
-        try {
-            const items = await User.find();
-            ctx.ok(items);
-        } catch (err) {
-            ctx.throw(HttpStatus.BAD_REQUEST, err.message);
-        }
-    }
 
     @post('')
 
@@ -23,7 +15,14 @@ export default class TestCtrl extends BaseCtrl {
 
             var username = ctx.request.body;
             var password = ctx.request.body;
-
+            User.authorize(username, password, function(err, user) {
+                if (err) {
+                    return statusCode(401);
+                }
+                    else {
+                        return statusCode(200);
+                    }
+                })
         }
         catch (err) {
             console.log(err);

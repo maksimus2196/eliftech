@@ -83,6 +83,7 @@
                     password: '',
                     age: ''
                 },
+
                 rules2: {
                     pass: [
                         { validator: validatePass, trigger: 'blur' }
@@ -99,10 +100,16 @@
 
         },
     methods: {
-        submitForm(formName) {
-            axios.post('/registration', this.User)
-            this.$refs[formName].validate((valid) => {
+        submitForm(ruleForm2) {
+            this.$refs[ruleForm2].validate((valid) => {
                 if (valid) {
+                        try {
+                            axios.post(`/registration`, this.ruleForm2);
+
+                        } catch (e) {
+                            this.errors.push(e)
+                        }
+
                     alert('submit!');
 
                 } else {
@@ -114,15 +121,8 @@
         resetForm(formName) {
             this.$refs[formName].resetFields();
         }
-    },
-        async postss() {
-            try {
-                await axios.post(`/registration`, this.ruleForm);
+    }
 
-            } catch (e) {
-                this.errors.push(e)
-            }
-        },
     }
 
 

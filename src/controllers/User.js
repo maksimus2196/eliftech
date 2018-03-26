@@ -1,6 +1,7 @@
 import HttpStatus from 'http-status-codes';
 import { controller, get, post, put, del } from 'koa-dec-router';
 import BaseCtrl from './Base';
+import User from '../models/User';
 import {checkUser, passport} from '../lib/passport';
 
 @controller('/user')
@@ -14,14 +15,14 @@ export default class TestCtrl extends BaseCtrl {
             } catch (err) {
                 ctx.throw(HttpStatus.BAD_REQUEST, err.message);
             }
-        await passport.authenticate( function (err, user) {
+       /* await passport.authenticate( function (err, user) {
             if (user) {
                 ctx.body = "hello " + user.displayName;
             } else {
                 ctx.body = "No such user";
                 console.log("err", err)
             }
-        } )
+        } )*/
     }
 
 

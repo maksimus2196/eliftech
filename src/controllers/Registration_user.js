@@ -21,15 +21,15 @@ export default class TestCtrl extends BaseCtrl {
 
     async createItem(ctx) {
         try {
-            var user = new User(user.username = ctx.request.body,
+            var user = new User(ctx.request.body);
+           /* var user = new User(user.username = ctx.request.body,
             user.password = ctx.request.body,
             user.inform = ctx.request.body,
             user.age = ctx.request.body,
             user.firstname = ctx.request.body,
             user.secondname = ctx.request.body
-            );
+            );*/
             user.save();
-            return (statusCode(200));
             }
         catch (err) {
             console.log(err);
