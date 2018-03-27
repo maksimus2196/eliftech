@@ -39,14 +39,12 @@ export async function createServer() {
     // Parses request bodies.
     .use(bodyParser())
     // router
+      .use(notFoundHandler)
+      .use(passport.initialize())
+      .use(passport.session())
     .use(decRouter.router.routes())
     .use(decRouter.router.allowedMethods())
     // Default handler when nothing stopped the chain.
-    .use(notFoundHandler)
-      .use(passport.initialize())
-     .use(passport.session());
-
-
   // Creates a http server ready to listen.
   const server = http.createServer(app.callback());
 
