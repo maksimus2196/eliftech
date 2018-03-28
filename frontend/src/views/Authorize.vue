@@ -42,7 +42,15 @@
                             this.User.authenticated = true;
                             localStorage.setItem('jwtToken', response.data.token);
                             localStorage.setItem('username', response.data.username);
-                            window.location.href = '/';
+                            then(response => {
+                                //	тут код виконається якщо все добре
+                                if (true) {
+                                    window.location.href = '/';
+                                }
+                            }).catch(error => {
+                                //	залишаємось на компоненті і показуємо помилку
+                                this.error = error;
+                            });
                             console.log(this.User);
                         } catch (e) {
                             this.errors.push(e)
