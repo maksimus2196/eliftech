@@ -38,20 +38,16 @@
                 this.$refs[ruleForm2].validate((valid) => {
                     if (valid) {
                         try {
-                            axios.post(`/authorize`, this.ruleForm2);
-                            this.User.authenticated = true;
-                            localStorage.setItem('jwtToken', response.data.token);
-                            localStorage.setItem('username', response.data.username);
-                            then(response => {
-                                //	тут код виконається якщо все добре
-                                if (true) {
-                                    window.location.href = '/';
-                                }
+                            axios.post(`/authorize`, this.ruleForm2)
+                                .then(response => {
+                                this.User.authenticated = true;
+                                localStorage.setItem('jwtToken', response.data.token);
+                                localStorage.setItem('username', response.data.username);
+                                window.location.href = '/';
+                                console.log(this.User);
                             }).catch(error => {
-                                //	залишаємось на компоненті і показуємо помилку
                                 this.error = error;
                             });
-                            console.log(this.User);
                         } catch (e) {
                             this.errors.push(e)
                         }

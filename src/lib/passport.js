@@ -1,8 +1,6 @@
 import User from '../models/User';
 import passport  from 'koa-passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-const jwt = require('jsonwebtoken');
-
 
 passport.use(new LocalStrategy({
     username: 'username',
@@ -16,8 +14,6 @@ passport.use(new LocalStrategy({
             if (!user || !user.checkPassword(password)) {
                 return done(null, false, {message: 'Нет такого пользователя или пароль неверен.'});
             }
-
-            passport.serializeUser(User.serializeUser());
             return done(null, user);
         });
     }

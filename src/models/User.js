@@ -32,8 +32,7 @@ schemaUser.virtual('password')
 schemaUser.methods.checkPassword = function (password) {
     if (!password) return false;
     if (!this.passwordHash) return false;
-    console.log(this.salt);
-    return crypto.pbkdf2Sync(password, this.salt, 1, 128, 'sha1') === this.passwordHash;
+    return crypto.pbkdf2Sync(password, this.salt, 1, 128, 'sha1').toString() === this.passwordHash;
 };
 export default mongoose.model('User',schemaUser);
 // GET /accounts"?"(seach google) userid
