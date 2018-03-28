@@ -34,11 +34,11 @@
         },
         methods: {
             submitForm(ruleForm2) {
+
                 this.$refs[ruleForm2].validate((valid) => {
                     if (valid) {
                         try {
                             axios.post(`/authorize`, this.ruleForm2);
-
                         } catch (e) {
                             this.errors.push(e)
                         }

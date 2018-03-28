@@ -10,7 +10,7 @@ export default class TestCtrl extends BaseCtrl {
     async getList(ctx) {
         try {
             const items = await ctx.state.user;
-            ctx.ok(items);
+            ctx(items);
             console.log(items);
         } catch (err) {
             ctx.throw(HttpStatus.BAD_REQUEST, err.message);
