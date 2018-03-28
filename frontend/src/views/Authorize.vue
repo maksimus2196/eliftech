@@ -39,6 +39,11 @@
                     if (valid) {
                         try {
                             axios.post(`/authorize`, this.ruleForm2);
+                            this.User.authenticated = true;
+                            localStorage.setItem('jwtToken', response.data.token);
+                            localStorage.setItem('username', response.data.username);
+                            window.location.href = '/';
+                            console.log(this.User);
                         } catch (e) {
                             this.errors.push(e)
                         }

@@ -23,7 +23,7 @@ export default class TestCtrl extends BaseCtrl {
                 } else {
 
                     ctx.status = 200;
-                    ctx.set('authorization', jwt.sign({ _id: user._id }, 'A very secret key'));
+                    ctx.set('authorization', jwt.sign({ _id: user.username }, 'A very secret key'));
                     ctx.body = {
                         token: jwt.sign({ _id: user._id }, 'A very secret key'),
                         message: "Successfully logged in!"
